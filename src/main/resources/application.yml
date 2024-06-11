@@ -1,8 +1,8 @@
 cas:
   #Required properties
-  server-url-prefix: https://dk.example.org:8143/cas
-  server-login-url: https://dk.example.org:8143/cas/login
-  client-host-url: https://dk.example.org:8443
+  server-url-prefix: https://login.dartmouth.edu/cas
+  server-login-url: https://login.dartmouth.edu/cas/login
+  client-host-url: http://localhost:8080
 
   #Optional properties
   authentication-url-patterns: [/protected, /protected2]
@@ -16,12 +16,12 @@ cas:
   #gateway: true
   use-session: true
   redirect-after-validation: true
-  #allowed-proxy-chains: ['https://dk.example.org:8443/proxy1', 'https://dk.example.org:8443/proxy2']
-  #proxy-callback-url: https://dk.example.org:8443/proxy-callback
+  #allowed-proxy-chains: ['https://localhost:8443/proxy1', 'https://localhost:8443/proxy2']
+  #proxy-callback-url: https://localhost:8443/proxy-callback
   #proxy-receptor-url: /proxy-callback
   #accept-any-proxy: true
 
-casLogoutUrl: https://dk.example.org:8143/cas/logout?service=https://dk.example.org:8443
+casLogoutUrl: https://login.dartmouth.edu/cas/logout?service=http://localhost:8080
 
 spring:
   thymeleaf:
@@ -30,15 +30,17 @@ spring:
 
 #Sample embedded servlet container SSL config and session tracking mode. Change as appropriate for your local deployment environment
 server:
-  port: 8443
+  port: 8080
   session:
     cookie:
       http-only: true
     tracking-modes: COOKIE
+  # ssl:
+  #   enabled: true
+  #   key-store: /etc/cas/thekeystore
+  #   key-store-password: changeit
   ssl:
-    enabled: true
-    key-store: /etc/cas/thekeystore
-    key-store-password: changeit
+    enabled: false
   #For 'renew' param, latest Java CAS client requires that it is set as the Servlet 'context-param'. This is how to easily set it in Spring Boot
   #context-parameters.renew: true
 
